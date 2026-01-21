@@ -182,13 +182,14 @@
                                 <label class="form-label">Categoria *</label>
                                 <select class="form-select" id="produtoCategoria" required>
                                     <option value="">Selecione...</option>
-                                    <option value="Anel">Anel</option>
-                                    <option value="Brinco">Brinco</option>
-                                    <option value="Colar">Colar</option>
-                                    <option value="Pulseira">Pulseira</option>
-                                    <option value="Conjunto">Conjunto</option>
-                                    <option value="Pingente">Pingente</option>
-                                    <option value="Berloque">Berloque</option>
+                                    <option value="ANÉIS">💍 Anéis</option>
+                                    <option value="BRINCOS">👂 Brincos</option>
+                                    <option value="COLARES">📿 Colares</option>
+                                    <option value="PULSEIRAS">⌚ Pulseiras</option>
+                                    <option value="CONJUNTOS">💎 Conjuntos</option>
+                                    <option value="CORRENTES">🔗 Correntes</option>
+                                    <option value="PINGENTES">✝️ Pingentes</option>
+                                    <option value="OUTROS">📦 Outros</option>
                                 </select>
                             </div>
                         </div>
@@ -340,13 +341,27 @@
             const container = document.getElementById('listaProdutos');
             container.innerHTML = '';
 
+            // Emojis por categoria
+            const emojis = {
+                'ANÉIS': '💍',
+                'BRINCOS': '👂',
+                'COLARES': '📿',
+                'PULSEIRAS': '⌚',
+                'CONJUNTOS': '💎',
+                'CORRENTES': '🔗',
+                'PINGENTES': '✝️',
+                'OUTROS': '📦'
+            };
+
             lista.forEach(produto => {
+                const emoji = emojis[produto.categoria] || '📦';
                 const card = `
                     <div class="col-md-4 col-lg-3">
                         <div class="produto-card">
                             <img src="${produto.imagem || 'https://via.placeholder.com/300x200?text=Sem+Imagem'}" 
                                  class="produto-imagem" alt="${produto.titulo}">
                             <div class="produto-info">
+                                <span class="badge bg-primary mb-2">${emoji} ${produto.categoria || 'OUTROS'}</span>
                                 <h6 class="mb-1">${produto.titulo}</h6>
                                 <p class="text-muted small mb-1">${produto.codigo}</p>
                                 <p class="text-primary fw-bold mb-2">R$ ${(produto.preco_varejo || 0).toFixed(2)}</p>
@@ -374,12 +389,26 @@
         }
 
         function carregarCategorias() {
-            const categorias = [...new Set(produtos.map(p => p.categoria))];
+            const categorias = [...new Set(produtos.map(p => p.categoria || 'OUTROS'))].sort();
             const select = document.getElementById('filtroCategoria');
+            
+            // Emojis
+            const emojis = {
+                'ANÉIS': '💍',
+                'BRINCOS': '👂',
+                'COLARES': '📿',
+                'PULSEIRAS': '⌚',
+                'CONJUNTOS': '💎',
+                'CORRENTES': '🔗',
+                'PINGENTES': '✝️',
+                'OUTROS': '📦'
+            };
+            
             categorias.forEach(cat => {
                 const option = document.createElement('option');
                 option.value = cat;
-                option.textContent = cat;
+                const emoji = emojis[cat] || '📦';
+                option.textContent = `${emoji} ${cat}`;
                 select.appendChild(option);
             });
         }

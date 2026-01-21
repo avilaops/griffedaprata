@@ -68,6 +68,7 @@ def init_db():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS produtos (
             codigo TEXT PRIMARY KEY,
+            categoria TEXT DEFAULT 'OUTROS',
             titulo TEXT,
             preco_atacado REAL,
             preco_varejo REAL,
@@ -76,9 +77,22 @@ def init_db():
             descricao TEXT,
             imagem_url TEXT,
             imagem_local TEXT,
+            imagem TEXT,
             updated_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    
+    # Adicionar coluna categoria se não existir (migração)
+    try:
+        cursor.execute("ALTER TABLE produtos ADD COLUMN categoria TEXT DEFAULT 'OUTROS'")
+    except:
+        pass  # Coluna já existe
+    
+    # Adicionar coluna imagem se não existir (migração)
+    try:
+        cursor.execute("ALTER TABLE produtos ADD COLUMN imagem TEXT")
+    except:
+        pass  # Coluna já existe
     
     conn.commit()
     conn.close()
