@@ -1,0 +1,28 @@
+{
+  "empresa": "Griffe da Prata",
+  "contatos": {
+    "whatsapp": {
+      "numero": "+55 17 99708-8111",
+      "numeroFormatado": "5517997088111",
+      "linkWhatsApp": "https://wa.me/5517997088111",
+      "descricao": "Número principal de vendas"
+    },
+    "instagram": {
+      "usuario": "@griffedaprata",
+      "url": "https://www.instagram.com/griffedaprata/",
+      "descricao": "Perfil oficial no Instagram"
+    },
+    "email": "contato@griffedaprata.com.br",
+    "website": "https://griffe.avila.inc"
+  },
+  "localizacao": {
+    "cidade": "São José do Rio Preto",
+    "estado": "SP",
+    "pais": "Brasil"
+  },
+  "horarioAtendimento": {
+    "segundaASexta": "09:00 - 18:00",
+    "sabado": "09:00 - 13:00",
+    "domingo": "Fechado"
+  }
+}

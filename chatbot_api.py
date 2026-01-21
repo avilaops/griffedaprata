@@ -178,7 +178,7 @@ def chatbot_mensagem():
         resposta_bot = gerar_resposta(mensagem_usuario + contexto_adicional, 'chatbot_site', historico_simples)
         
         if not resposta_bot:
-            resposta_bot = "Desculpe, estou com dificuldades técnicas. Por favor, entre em contato pelo WhatsApp: (82) 98160-2651"
+            resposta_bot = "Desculpe, estou com dificuldades técnicas. Por favor, entre em contato pelo WhatsApp: (17) 99708-8111"
         
         # Salvar no banco
         metadata = {

@@ -14,6 +14,16 @@ const CONFIG = {
         API_URL: 'http://localhost:5000',
         CHATBOT_URL: 'http://localhost:5001',
         WHATSAPP_URL: 'http://localhost:5002'
+    },
+
+    // 📞 CONTATOS
+    CONTATOS: {
+        whatsapp: '5517997088111',
+        whatsappFormatado: '+55 17 99708-8111',
+        whatsappLink: 'https://wa.me/5517997088111',
+        instagram: 'https://www.instagram.com/griffedaprata/',
+        instagramUser: '@griffedaprata',
+        email: 'contato@griffedaprata.com.br'
     }
 };
 
@@ -29,6 +39,8 @@ const ACTIVE_CONFIG = isDevelopment ? CONFIG.DEVELOPMENT : CONFIG.PRODUCTION;
 const API_URL = ACTIVE_CONFIG.API_URL;
 const CHATBOT_URL = ACTIVE_CONFIG.CHATBOT_URL;
 const WHATSAPP_URL = ACTIVE_CONFIG.WHATSAPP_URL;
+const CONTATOS = CONFIG.CONTATOS;
 
 console.log(`🔧 Ambiente: ${isDevelopment ? 'DESENVOLVIMENTO' : 'PRODUÇÃO'}`);
 console.log(`🌐 API: ${API_URL}`);
+console.log(`📱 WhatsApp: ${CONTATOS.whatsappFormatado}`);

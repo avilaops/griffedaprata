@@ -394,7 +394,7 @@ def gerar_whatsapp(pedido_id):
     msg += f"Cliente: {pedido_dict['cliente_nome']}\n"
     msg += f"Confirma disponibilidade? 🙏"
     
-    whatsapp_fornecedor = "5582981602651"
+    whatsapp_fornecedor = "5517997088111"
     
     return jsonify({
         'mensagem': msg,
