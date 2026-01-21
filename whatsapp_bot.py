@@ -12,7 +12,23 @@ from flask_cors import CORS
 from chatbot_hibrido import gerar_resposta
 
 app = Flask(__name__)
-CORS(app)
+
+# CORS configurado para GitHub Pages + Twilio
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://griffedaprata.com.br",
+            "https://www.griffedaprata.com.br",
+            "https://avilaops.github.io",
+            "https://api.twilio.com",
+            "http://localhost:*",
+            "http://127.0.0.1:*"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "X-Twilio-Signature"],
+        "supports_credentials": True
+    }
+})
 
 # Banco de dados para conversas WhatsApp
 DB_WHATSAPP = "whatsapp_conversas.db"

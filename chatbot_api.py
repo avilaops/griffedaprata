@@ -12,7 +12,22 @@ from datetime import datetime
 from chatbot_hibrido import gerar_resposta
 
 app = Flask(__name__)
-CORS(app)
+
+# CORS configurado para GitHub Pages + desenvolvimento local
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://griffedaprata.com.br",
+            "https://www.griffedaprata.com.br",
+            "https://avilaops.github.io",
+            "http://localhost:*",
+            "http://127.0.0.1:*"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"],
+        "supports_credentials": True
+    }
+})
 
 # Banco de dados para conversas
 DB_CONVERSAS = "chatbot_conversas.db"

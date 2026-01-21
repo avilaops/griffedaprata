@@ -17,7 +17,22 @@ import base64
 import re
 
 app = Flask(__name__)
-CORS(app)  # Permite requisições do frontend
+
+# CORS configurado para GitHub Pages + desenvolvimento local
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://griffedaprata.com.br",
+            "https://www.griffedaprata.com.br",
+            "https://avilaops.github.io",
+            "http://localhost:*",
+            "http://127.0.0.1:*"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
+    }
+})
 
 DB_PATH = "pedidos.db"
 PRODUTOS_JSON = "silvercrown_scraper/atacadodeprata_completo/dados/produtos_atacado_completo.json"
