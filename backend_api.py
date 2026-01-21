@@ -10,6 +10,11 @@ import json
 from datetime import datetime
 from pathlib import Path
 import hashlib
+from PIL import Image
+import pillow_avif  # Plugin para suporte AVIF
+import io
+import base64
+import re
 
 app = Flask(__name__)
 CORS(app)  # Permite requisições do frontend
@@ -401,6 +406,70 @@ def estatisticas():
     })
 
 
+# ==================== CONVERSÃO DE IMAGENS ====================
+
+def converter_para_avif(imagem_base64):
+    """
+    Converte qualquer imagem para formato AVIF (silenciosamente)
+    Retorna a imagem em base64 no formato AVIF
+    """
+    try:
+        # Se não houver imagem, retornar None
+        if not imagem_base64:
+            return None
+        
+        # Extrair o tipo de imagem e os dados base64
+        match = re.match(r'data:image/(\w+);base64,(.+)', imagem_base64)
+        if not match:
+            # Se não tiver prefixo, assume que é base64 puro
+            img_data = imagem_base64
+        else:
+            formato_original = match.group(1)
+            img_data = match.group(2)
+            
+            # Se já for AVIF, retornar como está
+            if formato_original.lower() == 'avif':
+                return imagem_base64
+        
+        # Decodificar base64
+        img_bytes = base64.b64decode(img_data)
+        
+        # Abrir imagem com Pillow
+        img = Image.open(io.BytesIO(img_bytes))
+        
+        # Converter para RGB se necessário (AVIF não suporta RGBA diretamente)
+        if img.mode in ('RGBA', 'LA', 'P'):
+            # Criar fundo branco
+            background = Image.new('RGB', img.size, (255, 255, 255))
+            if img.mode == 'P':
+                img = img.convert('RGBA')
+            background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+            img = background
+        elif img.mode != 'RGB':
+            img = img.convert('RGB')
+        
+        # Redimensionar se muito grande (otimização)
+        max_size = 1920
+        if max(img.size) > max_size:
+            img.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+        
+        # Salvar como AVIF
+        output = io.BytesIO()
+        img.save(output, format='AVIF', quality=85, speed=6)
+        output.seek(0)
+        
+        # Converter para base64
+        avif_base64 = base64.b64encode(output.read()).decode('utf-8')
+        
+        # Retornar com prefixo data URI
+        return f"data:image/avif;base64,{avif_base64}"
+        
+    except Exception as e:
+        print(f"⚠️  Erro na conversão para AVIF: {str(e)}")
+        # Em caso de erro, retornar a imagem original
+        return imagem_base64
+
+
 # ==================== GERENCIAMENTO DE PRODUTOS ====================
 
 @app.route('/api/produtos', methods=['POST'])
@@ -408,6 +477,12 @@ def adicionar_produto():
     """Adiciona ou atualiza um produto"""
     try:
         dados = request.json
+        
+        # 🔄 Converter imagem para AVIF silenciosamente
+        if dados.get('imagem'):
+            print("🔄 Convertendo imagem para AVIF...")
+            dados['imagem'] = converter_para_avif(dados['imagem'])
+            print("✅ Imagem convertida para AVIF com sucesso!")
         conn = get_db_connection()
         cursor = conn.cursor()
         

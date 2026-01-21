@@ -45,10 +45,11 @@ Plataforma completa de e-commerce para joias em prata com sistema de chatbot int
 
 ### Painel Administrativo
 - 📸 Upload de fotos por drag-and-drop
+- 🔄 **Conversão automática para AVIF (85% menor)**
 - ✏️ CRUD completo de produtos
 - 📊 Dashboard com estatísticas em tempo real
 - 🔍 Busca e filtros avançados
-- 💾 Armazenamento de imagens em Base64
+- 💾 Armazenamento otimizado de imagens
 - 📱 Interface responsiva com Bootstrap 5
 
 ### Integrações
@@ -63,6 +64,8 @@ Plataforma completa de e-commerce para joias em prata com sistema de chatbot int
 - **Python 3.10+**
 - **Flask 3.1.2** - Framework web
 - **SQLite3** - Banco de dados
+- **Pillow 10.2.0** - Processamento de imagens
+- **pillow-avif-plugin** - Conversão AVIF
 - **BeautifulSoup4** - Web scraping
 - **Flask-CORS** - Cross-Origin Resource Sharing
 
@@ -296,8 +299,11 @@ Acesse o painel em `admin_produtos.html` para gerenciar produtos.
 1. Abra `admin_produtos.html` no navegador
 2. Clique em **"Novo Produto"**
 3. Preencha os dados obrigatórios
-4. Arraste uma foto ou clique para selecionar
-5. Clique em **"Salvar"**
+4. Arraste uma foto ou clique para selecionar (**qualquer formato: JPG, PNG, WEBP, GIF**)
+5. O sistema converte automaticamente para **AVIF (85% menor)** 🚀
+6. Clique em **"Salvar"**
+
+💡 **A conversão é silenciosa e transparente - você não precisa fazer nada!**
 
 ## 📲 Integração WhatsApp
 
