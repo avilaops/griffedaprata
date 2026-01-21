@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Não Encontrada - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-container {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-icon {
+            font-size: 120px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .error-code {
+            font-size: 80px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .search-box {
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .suggestions {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f1f2f6;
+        }
+
+        .suggestions h3 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .suggestion-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .suggestion-item:hover {
+            background: #e8f4f8;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .suggestion-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 60px;
+            }
+
+            .error-title {
+                font-size: 24px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">🔍</div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Ops! Página Não Encontrada</h1>
+        <p class="error-message">
+            Parece que a joia que você estava procurando foi levada... 
+            Mas não se preocupe! Temos muitas outras preciosidades esperando por você.
+        </p>
+
+        <div class="search-box">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="🔍 Buscar produtos..." 
+                id="search-input"
+                onkeypress="handleSearch(event)"
+            >
+        </div>
+
+        <div class="buttons">
+            <a href="index.html" class="btn btn-primary">
+                🏠 Página Inicial
+            </a>
+            <a href="loja.html" class="btn btn-secondary">
+                🛍️ Ver Catálogo
+            </a>
+        </div>
+
+        <div class="suggestions">
+            <h3>🎯 Páginas Populares</h3>
+            <div class="suggestions-grid">
+                <a href="loja.html?categoria=ANEIS" class="suggestion-item">
+                    <div class="suggestion-icon">💍</div>
+                    <div>Anéis</div>
+                </a>
+                <a href="loja.html?categoria=BRINCOS" class="suggestion-item">
+                    <div class="suggestion-icon">👂</div>
+                    <div>Brincos</div>
+                </a>
+                <a href="loja.html?categoria=COLARES" class="suggestion-item">
+                    <div class="suggestion-icon">📿</div>
+                    <div>Colares</div>
+                </a>
+                <a href="loja.html?categoria=PULSEIRAS" class="suggestion-item">
+                    <div class="suggestion-icon">⌚</div>
+                    <div>Pulseiras</div>
+                </a>
+                <a href="contato.html" class="suggestion-item">
+                    <div class="suggestion-icon">📱</div>
+                    <div>Contato</div>
+                </a>
+                <a href="faq.html" class="suggestion-item">
+                    <div class="suggestion-icon">❓</div>
+                    <div>FAQ</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleSearch(e) {
+            if (e.key === 'Enter') {
+                const termo = document.getElementById('search-input').value;
+                if (termo) {
+                    window.location.href = `loja.html?busca=${encodeURIComponent(termo)}`;
+                }
+            }
+        }
+
+        // Log 404 para analytics (em produção)
+        console.log('404 Error:', window.location.href);
+        
+        // Salvar no localStorage para análise
+        const errors404 = JSON.parse(localStorage.getItem('errors_404')) || [];
+        errors404.push({
+            url: window.location.href,
+            timestamp: new Date().toISOString(),
+            referrer: document.referrer
+        });
+        localStorage.setItem('errors_404', JSON.stringify(errors404));
+    </script>
+</body>
+</html>

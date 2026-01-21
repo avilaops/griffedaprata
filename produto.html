@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #764ba2;
+            font-size: 32px;
+        }
+
+        .btn-voltar {
+            padding: 12px 24px;
+            background: #95a5a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .produto-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 968px) {
+            .produto-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .produto-imagens {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .imagem-principal {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .imagens-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .thumbnail:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .produto-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .produto-codigo {
+            color: #95a5a6;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .produto-titulo {
+            color: #2c3e50;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        .produto-avaliacao {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stars {
+            color: #f39c12;
+            font-size: 20px;
+        }
+
+        .reviews-count {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .produto-precos {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .preco-label {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .preco-atacado {
+            color: #95a5a6;
+            font-size: 16px;
+            text-decoration: line-through;
+            margin-bottom: 10px;
+        }
+
+        .preco-varejo {
+            color: #27ae60;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .economia {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .produto-detalhes {
+            border-top: 2px solid #f1f2f6;
+            padding-top: 20px;
+        }
+
+        .detalhe-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f2f6;
+        }
+
+        .detalhe-label {
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        .detalhe-valor {
+            color: #2c3e50;
+        }
+
+        .quantidade-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quantidade-label {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .quantidade-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-qty {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-qty:hover {
+            background: #764ba2;
+        }
+
+        .qty-display {
+            min-width: 50px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .btn-adicionar {
+            width: 100%;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-adicionar:hover {
+            background: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .btn-adicionar:active {
+            transform: scale(0.98);
+        }
+
+        .produto-descricao {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #f1f2f6;
+        }
+
+        .produto-descricao h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .produto-descricao p {
+            color: #7f8c8d;
+            line-height: 1.8;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-lancamento {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .badge-destaque {
+            background: #f39c12;
+            color: white;
+        }
+
+        .badge-estoque {
+            background: #27ae60;
+            color: white;
+        }
+
+        .relacionados {
+            margin-top: 60px;
+        }
+
+        .relacionados h2 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .relacionados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .produto-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+
+        .produto-card-img {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin-bottom: 15px;
+        }
+
+        .produto-card-titulo {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+
+        .produto-card-preco {
+            color: #27ae60;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .garantias {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .garantia-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .garantia-icon {
+            font-size: 24px;
+        }
+
+        .garantia-text {
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>🔷 Griffe da Prata</h1>
+                <p style="color: #7f8c8d;">Detalhes do Produto</p>
+            </div>
+            <a href="loja.html" class="btn-voltar">← Voltar para Loja</a>
+        </div>
+
+        <div id="produto-container">
+            <div class="loading">⏳ Carregando produto...</div>
+        </div>
+
+        <div class="relacionados" id="relacionados" style="display: none;">
+            <h2>🔍 Produtos Relacionados</h2>
+            <div class="relacionados-grid" id="relacionados-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        let produtoAtual = null;
+        let quantidade = 1;
+
+        // Obter ID do produto da URL
+        function getProductId() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id'));
+        }
+
+        // Carregar produto
+        async function carregarProduto() {
+            const id = getProductId();
+            if (!id) {
+                document.getElementById('produto-container').innerHTML = `
+                    <div style="text-align: center; color: white; padding: 60px;">
+                        <h2>❌ Produto não encontrado</h2>
+                        <p>O ID do produto não foi especificado na URL</p>
+                        <a href="loja.html" class="btn-voltar" style="display: inline-block; margin-top: 20px;">Voltar para Loja</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/produtos');
+                const produtos = await response.json();
+                produtoAtual = produtos.find(p => p.id === id);
+
+                if (!produtoAtual) {
+                    throw new Error('Produto não encontrado');
+                }
+
+                renderizarProduto(produtoAtual);
+                carregarRelacionados(produtos, produtoAtual);
+            } catch (error) {
+                document.getElementById('produto-container').innerHTML = `
+                    <div style="text-align: center; color: white; padding: 60px;">
+                        <h2>❌ Erro ao carregar produto</h2>
+                        <p>${error.message}</p>
+                        <a href="loja.html" class="btn-voltar" style="display: inline-block; margin-top: 20px;">Voltar para Loja</a>
+                    </div>
+                `;
+            }
+        }
+
+        function renderizarProduto(produto) {
+            const categoria = produto.codigo.split('-')[0];
+            const markup = ((produto.preco_varejo - produto.preco_atacado) / produto.preco_atacado * 100).toFixed(0);
+            
+            document.getElementById('produto-container').innerHTML = `
+                <div class="produto-content">
+                    <div class="produto-imagens">
+                        <div class="imagem-principal">💎</div>
+                        <div class="imagens-thumbnails">
+                            <div class="thumbnail" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);"></div>
+                            <div class="thumbnail" style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);"></div>
+                            <div class="thumbnail" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);"></div>
+                            <div class="thumbnail" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);"></div>
+                        </div>
+                    </div>
+
+                    <div class="produto-info">
+                        <div class="badges">
+                            <span class="badge badge-estoque">✓ Em Estoque</span>
+                            <span class="badge badge-destaque">🔥 Destaque</span>
+                        </div>
+
+                        <div class="produto-codigo">Cód: ${produto.codigo}</div>
+                        <h1 class="produto-titulo">${produto.titulo}</h1>
+
+                        <div class="produto-avaliacao">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews-count">(248 avaliações)</span>
+                        </div>
+
+                        <div class="produto-precos">
+                            <div class="preco-label">Preço Atacado:</div>
+                            <div class="preco-atacado">R$ ${produto.preco_atacado.toFixed(2)}</div>
+                            
+                            <div class="preco-label">Preço Varejo (você paga):</div>
+                            <div class="preco-varejo">R$ ${produto.preco_varejo.toFixed(2)}</div>
+                            
+                            <span class="economia">💰 Economia de ${markup}%</span>
+                        </div>
+
+                        <div class="produto-detalhes">
+                            <div class="detalhe-item">
+                                <span class="detalhe-label">Categoria:</span>
+                                <span class="detalhe-valor">${categoria}</span>
+                            </div>
+                            <div class="detalhe-item">
+                                <span class="detalhe-label">Peso:</span>
+                                <span class="detalhe-valor">${produto.peso}</span>
+                            </div>
+                            <div class="detalhe-item">
+                                <span class="detalhe-label">Material:</span>
+                                <span class="detalhe-valor">Prata 925</span>
+                            </div>
+                            <div class="detalhe-item">
+                                <span class="detalhe-label">Disponibilidade:</span>
+                                <span class="detalhe-valor" style="color: #27ae60; font-weight: bold;">✓ Pronta Entrega</span>
+                            </div>
+                        </div>
+
+                        <div class="quantidade-selector">
+                            <span class="quantidade-label">Quantidade:</span>
+                            <div class="quantidade-controls">
+                                <button class="btn-qty" onclick="alterarQuantidade(-1)">-</button>
+                                <span class="qty-display" id="qty-display">1</span>
+                                <button class="btn-qty" onclick="alterarQuantidade(1)">+</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho()">
+                            🛒 Adicionar ao Carrinho - R$ ${produto.preco_varejo.toFixed(2)}
+                        </button>
+
+                        <div class="garantias">
+                            <div class="garantia-item">
+                                <span class="garantia-icon">✅</span>
+                                <span class="garantia-text"><strong>Garantia de 7 dias</strong> - Não gostou? Devolvemos seu dinheiro</span>
+                            </div>
+                            <div class="garantia-item">
+                                <span class="garantia-icon">🚚</span>
+                                <span class="garantia-text"><strong>Frete grátis</strong> acima de R$ 299,00</span>
+                            </div>
+                            <div class="garantia-item">
+                                <span class="garantia-icon">💎</span>
+                                <span class="garantia-text"><strong>Prata 925 certificada</strong> com selo de qualidade</span>
+                            </div>
+                            <div class="garantia-item">
+                                <span class="garantia-icon">💳</span>
+                                <span class="garantia-text"><strong>Parcele em até 12x</strong> ou 10% OFF no PIX</span>
+                            </div>
+                        </div>
+
+                        <div class="produto-descricao">
+                            <h3>📝 Descrição do Produto</h3>
+                            <p>
+                                ${produto.titulo} é uma peça exclusiva em prata 925, perfeita para quem busca elegância e sofisticação. 
+                                Confeccionada com os melhores materiais, esta joia foi desenvolvida para realçar sua beleza natural. 
+                                ${produto.peso} de pura elegância que combina com qualquer ocasião.
+                            </p>
+                            <p style="margin-top: 15px;">
+                                <strong>Características:</strong><br>
+                                • Material: Prata 925 (Prata de Lei)<br>
+                                • Peso: ${produto.peso}<br>
+                                • Código: ${produto.codigo}<br>
+                                • Acabamento: Polido e brilhante<br>
+                                • Hipoalergênico: Ideal para peles sensíveis
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Atualizar título da página
+            document.title = `${produto.titulo} - Griffe da Prata`;
+        }
+
+        function carregarRelacionados(produtos, produtoAtual) {
+            const categoria = produtoAtual.codigo.split('-')[0];
+            const relacionados = produtos
+                .filter(p => p.id !== produtoAtual.id && p.codigo.startsWith(categoria))
+                .slice(0, 4);
+
+            if (relacionados.length > 0) {
+                document.getElementById('relacionados').style.display = 'block';
+                document.getElementById('relacionados-grid').innerHTML = relacionados.map(p => `
+                    <div class="produto-card" onclick="window.location.href='produto.html?id=${p.id}'">
+                        <div class="produto-card-img"></div>
+                        <div class="produto-card-titulo">${p.titulo}</div>
+                        <div class="produto-card-preco">R$ ${p.preco_varejo.toFixed(2)}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function alterarQuantidade(delta) {
+            quantidade = Math.max(1, quantidade + delta);
+            document.getElementById('qty-display').textContent = quantidade;
+            
+            // Atualizar preço no botão
+            const precoTotal = produtoAtual.preco_varejo * quantidade;
+            document.querySelector('.btn-adicionar').innerHTML = 
+                `🛒 Adicionar ao Carrinho - R$ ${precoTotal.toFixed(2)}`;
+        }
+
+        function adicionarAoCarrinho() {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const itemExistente = carrinho.find(item => item.id === produtoAtual.id);
+
+            if (itemExistente) {
+                itemExistente.quantidade += quantidade;
+            } else {
+                carrinho.push({
+                    id: produtoAtual.id,
+                    codigo: produtoAtual.codigo,
+                    titulo: produtoAtual.titulo,
+                    preco: produtoAtual.preco_varejo,
+                    peso: produtoAtual.peso,
+                    quantidade: quantidade
+                });
+            }
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+            // Feedback visual
+            const btn = document.querySelector('.btn-adicionar');
+            const textoOriginal = btn.innerHTML;
+            btn.innerHTML = '✅ Adicionado ao Carrinho!';
+            btn.style.background = '#27ae60';
+            
+            setTimeout(() => {
+                btn.innerHTML = textoOriginal;
+                btn.style.background = '#667eea';
+            }, 2000);
+
+            // Perguntar se quer ir para carrinho ou continuar comprando
+            setTimeout(() => {
+                if (confirm('Produto adicionado! Deseja ir para o carrinho?')) {
+                    window.location.href = 'loja.html';
+                }
+            }, 2100);
+        }
+
+        // Inicializar
+        carregarProduto();
+    </script>
+</body>
+</html>

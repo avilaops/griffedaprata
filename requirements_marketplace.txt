@@ -1,0 +1,15 @@
+# Dependências para integração com MarketplaceBuilder
+
+# Básicas (já instaladas)
+requests==2.31.0
+urllib3==2.0.7
+
+# Para agendamento
+schedule==1.2.0
+
+# Já instaladas anteriormente
+beautifulsoup4==4.12.3
+selenium==4.40.0
+lxml==5.1.0
+flask==3.1.2
+flask-cors==6.0.2

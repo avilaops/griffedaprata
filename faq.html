@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas Frequentes - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #764ba2;
+            font-size: 32px;
+        }
+
+        .btn-voltar {
+            padding: 12px 24px;
+            background: #95a5a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .search-box h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .categorias {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .categoria-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .categoria-btn:hover,
+        .categoria-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .faq-category-title {
+            color: #764ba2;
+            font-size: 28px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #f1f2f6;
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-question-text {
+            flex: 1;
+        }
+
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+            margin-right: 15px;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            color: #667eea;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #7f8c8d;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 20px 10px;
+        }
+
+        .contact-cta {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .contact-cta h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .contact-cta p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            padding: 16px 40px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .btn-contact:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>🔷 Griffe da Prata</h1>
+                <p style="color: #7f8c8d;">Perguntas Frequentes</p>
+            </div>
+            <a href="index.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="search-box">
+            <h2>❓ Como podemos ajudar?</h2>
+            <input type="text" class="search-input" id="search-input" placeholder="🔍 Busque sua dúvida..." onkeyup="filtrarPerguntas()">
+            
+            <div class="categorias">
+                <button class="categoria-btn active" onclick="filtrarCategoria('todas')">Todas</button>
+                <button class="categoria-btn" onclick="filtrarCategoria('produtos')">Produtos</button>
+                <button class="categoria-btn" onclick="filtrarCategoria('pedidos')">Pedidos</button>
+                <button class="categoria-btn" onclick="filtrarCategoria('pagamento')">Pagamento</button>
+                <button class="categoria-btn" onclick="filtrarCategoria('entrega')">Entrega</button>
+                <button class="categoria-btn" onclick="filtrarCategoria('trocas')">Trocas</button>
+            </div>
+        </div>
+
+        <div class="no-results" id="no-results">
+            <h3>🔍 Nenhuma pergunta encontrada</h3>
+            <p>Tente buscar por outros termos ou entre em contato conosco</p>
+        </div>
+
+        <!-- PRODUTOS -->
+        <div class="faq-section" data-categoria="produtos">
+            <h3 class="faq-category-title">💎 Sobre os Produtos</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">💎</span>
+                    <span class="faq-question-text">Todas as peças são realmente de prata 925?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Todas as nossas joias são confeccionadas em prata 925 (prata de lei), que contém 92,5% de prata pura. Cada peça possui o selo de certificação 925 e garantia de autenticidade.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">⚖️</span>
+                    <span class="faq-question-text">Como saber o peso e tamanho da joia?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Todas as informações de peso, tamanho e dimensões estão disponíveis na página de cada produto. Se tiver dúvidas específicas, entre em contato pelo WhatsApp.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🔍</span>
+                    <span class="faq-question-text">As joias vêm com certificado?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Todas as peças acompanham certificado de autenticidade da prata 925 e nota fiscal.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">😷</span>
+                    <span class="faq-question-text">As joias são hipoalergênicas?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! A prata 925 é naturalmente hipoalergênica e ideal para peles sensíveis. Não contém níquel ou outros metais que causam alergia.
+                </div>
+            </div>
+        </div>
+
+        <!-- PEDIDOS -->
+        <div class="faq-section" data-categoria="pedidos">
+            <h3 class="faq-category-title">📦 Pedidos e Compras</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🛒</span>
+                    <span class="faq-question-text">Como faço um pedido?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    É simples! Navegue pela loja, adicione produtos ao carrinho, clique em "Finalizar Compra", preencha seus dados e escolha a forma de pagamento. Você receberá a confirmação por email e WhatsApp.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">💵</span>
+                    <span class="faq-question-text">Qual o valor mínimo de compra?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Não temos valor mínimo! Você pode comprar a partir de uma peça. Frete grátis para compras acima de R$ 299,00.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🔄</span>
+                    <span class="faq-question-text">Posso cancelar meu pedido?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Você pode cancelar gratuitamente antes do envio. Após o envio, pode recusar o recebimento ou solicitar devolução em até 7 dias após receber.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">📱</span>
+                    <span class="faq-question-text">Como acompanho meu pedido?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Após o envio, você receberá o código de rastreamento por email e WhatsApp. Você também pode acompanhar na área "Minha Conta" do site.
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="faq-section" data-categoria="pagamento">
+            <h3 class="faq-category-title">💳 Formas de Pagamento</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">💳</span>
+                    <span class="faq-question-text">Quais formas de pagamento aceitam?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Aceitamos: Cartão de crédito (até 12x), PIX (10% de desconto), boleto bancário, transferência bancária e débito online.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🏦</span>
+                    <span class="faq-question-text">Como funciona o parcelamento?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Parcelamos em até 12x sem juros no cartão de crédito. O valor mínimo da parcela é R$ 20,00.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">⚡</span>
+                    <span class="faq-question-text">O pagamento no PIX é mais rápido?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Pagamentos via PIX são aprovados instantaneamente e seu pedido entra em produção imediatamente. Além disso, você ganha 10% de desconto!
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🔒</span>
+                    <span class="faq-question-text">O pagamento é seguro?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Totalmente! Utilizamos criptografia SSL e processadores de pagamento certificados. Seus dados estão 100% protegidos.
+                </div>
+            </div>
+        </div>
+
+        <!-- ENTREGA -->
+        <div class="faq-section" data-categoria="entrega">
+            <h3 class="faq-category-title">🚚 Entrega e Frete</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">📍</span>
+                    <span class="faq-question-text">Entregam em todo o Brasil?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Enviamos para todos os estados brasileiros via Correios ou transportadora.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">⏱️</span>
+                    <span class="faq-question-text">Quanto tempo demora a entrega?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    O prazo varia conforme sua região: Sul e Sudeste: 7 a 12 dias úteis | Centro-Oeste e Nordeste: 10 a 15 dias úteis | Norte: 12 a 20 dias úteis. Oferecemos envio expresso para capitais.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🎁</span>
+                    <span class="faq-question-text">Quando o frete é grátis?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Frete grátis para compras acima de R$ 299,00 para todo o Brasil!
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">📦</span>
+                    <span class="faq-question-text">Como vem embalado?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Todas as joias vêm em embalagem especial, com proteção adequada e caixinha de presente. Perfeito para presentear!
+                </div>
+            </div>
+        </div>
+
+        <!-- TROCAS -->
+        <div class="faq-section" data-categoria="trocas">
+            <h3 class="faq-category-title">🔄 Trocas e Devoluções</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🔄</span>
+                    <span class="faq-question-text">Posso trocar se não gostar?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Você tem 7 dias corridos após receber o produto para solicitar troca ou devolução, conforme o Código de Defesa do Consumidor (direito de arrependimento).
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">💰</span>
+                    <span class="faq-question-text">Como funciona o reembolso?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Após recebermos o produto devolvido, analisamos em até 3 dias úteis. O reembolso é feito em até 7 dias úteis na mesma forma de pagamento original.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">📋</span>
+                    <span class="faq-question-text">Quais condições para troca?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    O produto deve estar sem uso, com etiquetas, embalagem original e nota fiscal. Produtos usados não podem ser trocados por questões de higiene.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-icon">🏷️</span>
+                    <span class="faq-question-text">Quem paga o frete da devolução?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Se houver defeito de fabricação, nós pagamos. Se for desistência/arrependimento, o frete de devolução é por conta do cliente.
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-cta">
+            <h2>❓ Não encontrou sua resposta?</h2>
+            <p>Nossa equipe está pronta para ajudar você!</p>
+            <a href="contato.html" class="btn-contact">📱 Falar no WhatsApp</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasOpen = item.classList.contains('open');
+            
+            // Fechar todos
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            
+            // Abrir o clicado (se não estava aberto)
+            if (!wasOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        function filtrarCategoria(categoria) {
+            // Atualizar botões
+            document.querySelectorAll('.categoria-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filtrar seções
+            const sections = document.querySelectorAll('.faq-section');
+            let visibleCount = 0;
+
+            sections.forEach(section => {
+                if (categoria === 'todas' || section.dataset.categoria === categoria) {
+                    section.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            document.getElementById('no-results').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function filtrarPerguntas() {
+            const termo = document.getElementById('search-input').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const question = item.querySelector('.faq-question-text').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(termo) || answer.includes(termo)) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Mostrar/ocultar seções vazias
+            document.querySelectorAll('.faq-section').forEach(section => {
+                const visibleItems = section.querySelectorAll('.faq-item[style="display: block;"]').length;
+                section.style.display = visibleItems > 0 ? 'block' : 'none';
+            });
+
+            document.getElementById('no-results').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

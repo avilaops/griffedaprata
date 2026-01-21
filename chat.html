@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .chat-info h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .chat-info p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        .send-button:active {
+            transform: scale(0.95);
+        }
+
+        .quick-replies {
+            display: flex;
+            gap: 10px;
+            padding: 10px 20px;
+            overflow-x: auto;
+            background: white;
+        }
+
+        .quick-reply-btn {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .quick-reply-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .product-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .product-img {
+            width: 60px;
+            height: 60px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .product-price {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .message-bubble {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-info">
+                <h2>Assistente Virtual</h2>
+                <p>Griffe da Prata • Online</p>
+            </div>
+        </div>
+
+        <!-- Quick Replies -->
+        <div class="quick-replies">
+            <button class="quick-reply-btn" onclick="enviarMensagemRapida('Ver produtos')">💎 Ver Produtos</button>
+            <button class="quick-reply-btn" onclick="enviarMensagemRapida('Como comprar?')">🛍️ Como Comprar</button>
+            <button class="quick-reply-btn" onclick="enviarMensagemRapida('Formas de pagamento')">💳 Pagamento</button>
+            <button class="quick-reply-btn" onclick="enviarMensagemRapida('Prazo de entrega')">📦 Entrega</button>
+            <button class="quick-reply-btn" onclick="enviarMensagemRapida('Falar com humano')">👤 Atendente</button>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Mensagens serão adicionadas aqui -->
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span style="font-size: 12px; color: #999;">Digitando...</span>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-container">
+            <input 
+                type="text" 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="Digite sua mensagem..."
+                onkeypress="if(event.key === 'Enter') enviarMensagem()"
+            >
+            <button class="send-button" onclick="enviarMensagem()">
+                ➤
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5001/api/chatbot';
+        let sessaoId = localStorage.getItem('chatbot_sessao_id');
+        let mensagensCache = [];
+
+        // Inicializar chatbot
+        async function inicializarChatbot() {
+            if (!sessaoId) {
+                try {
+                    const usuario = JSON.parse(localStorage.getItem('usuario_logado') || '{}');
+                    
+                    const response = await fetch(`${API_URL}/iniciar`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            nome: usuario.nome,
+                            email: usuario.email
+                        })
+                    });
+
+                    const data = await response.json();
+                    sessaoId = data.sessao_id;
+                    localStorage.setItem('chatbot_sessao_id', sessaoId);
+
+                    // Mostrar mensagem inicial
+                    adicionarMensagem('bot', data.mensagem_inicial);
+
+                } catch (error) {
+                    console.error('Erro ao inicializar:', error);
+                    adicionarMensagem('bot', 'Olá! 👋 Sou a assistente virtual da Griffe da Prata. Como posso ajudar?');
+                }
+            } else {
+                // Carregar histórico
+                carregarHistorico();
+            }
+        }
+
+        // Carregar histórico
+        async function carregarHistorico() {
+            try {
+                const response = await fetch(`${API_URL}/historico/${sessaoId}`);
+                const data = await response.json();
+
+                if (data.historico && data.historico.length > 0) {
+                    data.historico.forEach(msg => {
+                        adicionarMensagem('user', msg.usuario, false);
+                        adicionarMensagem('bot', msg.bot, false);
+                    });
+                } else {
+                    adicionarMensagem('bot', 'Olá! 👋 Bem-vindo de volta! Como posso ajudar?');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar histórico:', error);
+            }
+        }
+
+        // Adicionar mensagem
+        function adicionarMensagem(tipo, texto, animar = true) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${tipo}`;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.innerHTML = formatarMensagem(texto);
+
+            messageDiv.appendChild(bubble);
+            messagesDiv.appendChild(messageDiv);
+
+            // Scroll para o final
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            mensagensCache.push({ tipo, texto, timestamp: new Date() });
+        }
+
+        // Formatar mensagem (Markdown básico)
+        function formatarMensagem(texto) {
+            return texto
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>')
+                .replace(/💎|🛍️|✨|📦|💳|🔄|✅/g, match => `<span style="font-size: 1.2em">${match}</span>`);
+        }
+
+        // Enviar mensagem
+        async function enviarMensagem() {
+            const input = document.getElementById('chatInput');
+            const mensagem = input.value.trim();
+
+            if (!mensagem) return;
+
+            // Adicionar mensagem do usuário
+            adicionarMensagem('user', mensagem);
+            input.value = '';
+
+            // Mostrar indicador de digitação
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.classList.add('active');
+
+            try {
+                const response = await fetch(`${API_URL}/mensagem`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mensagem: mensagem,
+                        sessao_id: sessaoId
+                    })
+                });
+
+                const data = await response.json();
+
+                // Esconder indicador
+                typingIndicator.classList.remove('active');
+
+                // Adicionar resposta do bot
+                adicionarMensagem('bot', data.resposta);
+
+                // Mostrar produtos se houver
+                if (data.produtos && data.produtos.length > 0) {
+                    mostrarProdutos(data.produtos);
+                }
+
+            } catch (error) {
+                console.error('Erro ao enviar mensagem:', error);
+                typingIndicator.classList.remove('active');
+                adicionarMensagem('bot', 'Desculpe, ocorreu um erro. Por favor, tente novamente ou entre em contato pelo WhatsApp: (82) 98160-2651');
+            }
+        }
+
+        // Enviar mensagem rápida
+        function enviarMensagemRapida(texto) {
+            document.getElementById('chatInput').value = texto;
+            enviarMensagem();
+        }
+
+        // Mostrar produtos
+        function mostrarProdutos(produtos) {
+            const messagesDiv = document.getElementById('chatMessages');
+            
+            produtos.forEach(produto => {
+                const productCard = document.createElement('div');
+                productCard.className = 'message bot';
+                productCard.innerHTML = `
+                    <div class="message-bubble">
+                        <div class="product-card">
+                            <div class="product-img">💎</div>
+                            <div class="product-info">
+                                <h4>${produto.titulo}</h4>
+                                <p>${produto.codigo}</p>
+                                <p class="product-price">R$ ${produto.preco.toFixed(2)}</p>
+                                <button onclick="verProduto('${produto.codigo}')" 
+                                    style="margin-top: 5px; padding: 5px 10px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                    Ver Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                messagesDiv.appendChild(productCard);
+            });
+
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Ver produto
+        function verProduto(codigo) {
+            window.open(`produto.html?codigo=${codigo}`, '_blank');
+        }
+
+        // Inicializar ao carregar
+        document.addEventListener('DOMContentLoaded', inicializarChatbot);
+    </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #764ba2;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        @media (max-width: 968px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-section, .resumo-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #764ba2;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .item-pedido {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #f1f2f6;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-titulo {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .item-detalhes {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .item-valor {
+            text-align: right;
+        }
+
+        .item-preco {
+            color: #27ae60;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .resumo-linha {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+        .resumo-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-top: 2px solid #f1f2f6;
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .btn-finalizar {
+            width: 100%;
+            padding: 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-finalizar:hover {
+            background: #229954;
+            transform: scale(1.02);
+        }
+
+        .btn-finalizar:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #95a5a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .success-content h2 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .success-content p {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .whatsapp-link {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔷 Finalizar Compra</h1>
+            <p style="color: #7f8c8d;">Complete seus dados para concluir o pedido</p>
+        </div>
+
+        <a href="loja.html" class="btn-voltar">← Voltar para a loja</a>
+
+        <div class="checkout-grid">
+            <div class="form-section">
+                <h2 class="section-title">📋 Seus Dados</h2>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" name="nome" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Telefone *</label>
+                            <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CEP *</label>
+                        <input type="text" name="cep" placeholder="00000-000" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cidade *</label>
+                            <input type="text" name="cidade" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado *</label>
+                            <select name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Endereço Completo *</label>
+                        <input type="text" name="endereco" placeholder="Rua, número, bairro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea name="observacoes" rows="4" placeholder="Informações adicionais..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="resumo-section">
+                <h2 class="section-title">📦 Resumo do Pedido</h2>
+                <div id="itens-pedido"></div>
+                
+                <div class="resumo-linha">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="resumo-total">
+                    <span>Total:</span>
+                    <span id="total">R$ 0,00</span>
+                </div>
+
+                <button class="btn-finalizar" onclick="finalizarPedido()">
+                    ✅ Confirmar Pedido
+                </button>
+
+                <p style="color: #7f8c8d; font-size: 14px; margin-top: 15px; text-align: center;">
+                    Ao confirmar, você será redirecionado para o WhatsApp para finalizar o pagamento
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sucesso -->
+    <div class="success-modal" id="success-modal">
+        <div class="success-content">
+            <div class="success-icon">✅</div>
+            <h2>Pedido Criado com Sucesso!</h2>
+            <p>Seu pedido #<span id="pedido-id"></span> foi registrado</p>
+            <p><strong>Total: R$ <span id="pedido-total"></span></strong></p>
+            <p style="margin-top: 20px;">Clique abaixo para enviar no WhatsApp e finalizar o pagamento:</p>
+            <a href="#" id="whatsapp-link" class="whatsapp-link" target="_blank">
+                📱 Abrir WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        function renderizarResumo() {
+            if (carrinho.length === 0) {
+                alert('Carrinho vazio!');
+                window.location.href = 'loja.html';
+                return;
+            }
+
+            const container = document.getElementById('itens-pedido');
+            container.innerHTML = carrinho.map(item => `
+                <div class="item-pedido">
+                    <div class="item-info">
+                        <div class="item-titulo">${item.titulo}</div>
+                        <div class="item-detalhes">
+                            ${item.codigo} • ${item.peso} • Qtd: ${item.quantidade}
+                        </div>
+                    </div>
+                    <div class="item-valor">
+                        <div class="item-preco">R$ ${(item.preco * item.quantidade).toFixed(2)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            document.getElementById('subtotal').textContent = `R$ ${total.toFixed(2)}`;
+            document.getElementById('total').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        async function finalizarPedido() {
+            const form = document.getElementById('checkout-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(form);
+            const cliente = {
+                nome: formData.get('nome'),
+                telefone: formData.get('telefone'),
+                email: formData.get('email'),
+                endereco: {
+                    cep: formData.get('cep'),
+                    cidade: formData.get('cidade'),
+                    estado: formData.get('estado'),
+                    logradouro: formData.get('endereco')
+                }
+            };
+
+            const produtos = carrinho.map(item => ({
+                codigo: item.codigo,
+                titulo: item.titulo,
+                preco: item.preco,
+                quantidade: item.quantidade
+            }));
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+
+            const pedido = {
+                cliente,
+                produtos,
+                total,
+                observacoes: formData.get('observacoes'),
+                status: 'Aguardando Confirmação'
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pedido)
+                });
+
+                const resultado = await response.json();
+
+                // Gerar link WhatsApp
+                const whatsappUrl = await fetch(`http://localhost:5000/api/pedidos/${resultado.id}/whatsapp`)
+                    .then(r => r.json())
+                    .then(data => data.whatsapp_url);
+
+                // Mostrar modal de sucesso
+                document.getElementById('pedido-id').textContent = resultado.id;
+                document.getElementById('pedido-total').textContent = total.toFixed(2);
+                document.getElementById('whatsapp-link').href = whatsappUrl;
+                document.getElementById('success-modal').classList.add('show');
+
+                // Limpar carrinho
+                localStorage.removeItem('carrinho');
+
+            } catch (error) {
+                alert('Erro ao criar pedido. Verifique se o backend está rodando.');
+                console.error(error);
+            }
+        }
+
+        // Inicializar
+        renderizarResumo();
+    </script>
+</body>
+</html>

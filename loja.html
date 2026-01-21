@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griffe da Prata - Loja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #764ba2;
+            font-size: 32px;
+        }
+
+        .cart-button {
+            position: relative;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            background: #f1f2f6;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .produto-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+
+        .produto-imagem {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .produto-codigo {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .produto-titulo {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            min-height: 44px;
+        }
+
+        .produto-peso {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .produto-precos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .preco-atacado {
+            color: #95a5a6;
+            font-size: 14px;
+            text-decoration: line-through;
+        }
+
+        .preco-varejo {
+            color: #27ae60;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-adicionar {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-adicionar:hover {
+            background: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .btn-adicionar:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 15px;
+            color: #95a5a6;
+        }
+
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        /* Modal Carrinho */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 90%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .modal-header h2 {
+            color: #764ba2;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #95a5a6;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #f1f2f6;
+            align-items: center;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-titulo {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-preco {
+            color: #27ae60;
+            font-size: 18px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-qty {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .qty-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-remove {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f1f2f6;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-checkout:hover {
+            background: #229954;
+            transform: scale(1.02);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>🔷 Griffe da Prata</h1>
+            <p style="color: #7f8c8d;">Joias em Prata 925</p>
+        </div>
+        <button class="cart-button" onclick="abrirCarrinho()">
+            🛒 Carrinho
+            <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="total-produtos">-</div>
+            <div class="stat-label">Produtos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="categorias">-</div>
+            <div class="stat-label">Categorias</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <input type="text" class="search-box" id="search-box" placeholder="🔍 Buscar produtos..." onkeyup="filtrarProdutos()">
+        <div class="filter-tags" id="filter-tags"></div>
+    </div>
+
+    <div class="produtos-grid" id="produtos-grid">
+        <div class="loading">⏳ Carregando produtos...</div>
+    </div>
+
+    <!-- Modal Carrinho -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Seu Carrinho</h2>
+                <button class="btn-close" onclick="fecharCarrinho()">×</button>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total">R$ 0,00</span>
+                </div>
+                <button class="btn-checkout" onclick="finalizarCompra()">✅ Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let produtos = [];
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        let categorias = new Set();
+
+        // Carregar produtos
+        async function carregarProdutos() {
+            try {
+                const response = await fetch('http://localhost:5000/api/produtos');
+                produtos = await response.json();
+                
+                // Extrair categorias únicas
+                produtos.forEach(p => {
+                    const codigo = p.codigo.split('-')[0];
+                    categorias.add(codigo);
+                });
+
+                document.getElementById('total-produtos').textContent = produtos.length;
+                document.getElementById('categorias').textContent = categorias.size;
+
+                renderizarFiltros();
+                renderizarProdutos(produtos);
+                atualizarBadgeCarrinho();
+            } catch (error) {
+                document.getElementById('produtos-grid').innerHTML = `
+                    <div class="empty-state">
+                        <h2>❌ Erro ao carregar produtos</h2>
+                        <p>Verifique se o backend está rodando em http://localhost:5000</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderizarFiltros() {
+            const container = document.getElementById('filter-tags');
+            container.innerHTML = '<div class="filter-tag active" onclick="filtrarCategoria(null, this)">Todos</div>';
+            
+            categorias.forEach(cat => {
+                container.innerHTML += `
+                    <div class="filter-tag" onclick="filtrarCategoria('${cat}', this)">${cat}</div>
+                `;
+            });
+        }
+
+        function filtrarCategoria(categoria, elemento) {
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+            elemento.classList.add('active');
+            
+            const termo = document.getElementById('search-box').value;
+            filtrarProdutos();
+        }
+
+        function filtrarProdutos() {
+            const termo = document.getElementById('search-box').value.toLowerCase();
+            const categoriaAtiva = document.querySelector('.filter-tag.active').textContent;
+            
+            let filtrados = produtos;
+            
+            if (categoriaAtiva !== 'Todos') {
+                filtrados = filtrados.filter(p => p.codigo.startsWith(categoriaAtiva));
+            }
+            
+            if (termo) {
+                filtrados = filtrados.filter(p => 
+                    p.titulo.toLowerCase().includes(termo) ||
+                    p.codigo.toLowerCase().includes(termo)
+                );
+            }
+            
+            renderizarProdutos(filtrados);
+        }
+
+        function renderizarProdutos(lista) {
+            const container = document.getElementById('produtos-grid');
+            
+            if (lista.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h2>🔍 Nenhum produto encontrado</h2>
+                        <p>Tente buscar por outro termo</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = lista.map(produto => `
+                <div class="produto-card">
+                    <img src="${produto.imagem_url || 'https://via.placeholder.com/300x200?text=Sem+Imagem'}" 
+                         class="produto-imagem" 
+                         alt="${produto.titulo}"
+                         onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem'">
+                    <div class="produto-codigo">${produto.codigo}</div>
+                    <div class="produto-titulo">${produto.titulo}</div>
+                    <div class="produto-peso">⚖️ ${produto.peso}</div>
+                    <div class="produto-precos">
+                        <div>
+                            <div class="preco-atacado">Atacado: R$ ${produto.preco_atacado.toFixed(2)}</div>
+                            <div class="preco-varejo">R$ ${produto.preco_varejo.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    <button class="btn-adicionar" onclick="adicionarAoCarrinho(${produto.id})">
+                        🛒 Adicionar
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function adicionarAoCarrinho(produtoId) {
+            const produto = produtos.find(p => p.id === produtoId);
+            const itemExistente = carrinho.find(item => item.id === produtoId);
+            
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({
+                    id: produto.id,
+                    codigo: produto.codigo,
+                    titulo: produto.titulo,
+                    preco: produto.preco_varejo,
+                    peso: produto.peso,
+                    quantidade: 1
+                });
+            }
+            
+            salvarCarrinho();
+            atualizarBadgeCarrinho();
+            
+            // Feedback visual
+            const btn = event.target;
+            btn.textContent = '✓ Adicionado!';
+            setTimeout(() => {
+                btn.innerHTML = '🛒 Adicionar';
+            }, 1000);
+        }
+
+        function abrirCarrinho() {
+            renderizarCarrinho();
+            document.getElementById('cart-modal').classList.add('show');
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('cart-modal').classList.remove('show');
+        }
+
+        function renderizarCarrinho() {
+            const container = document.getElementById('cart-items');
+            
+            if (carrinho.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>🛒 Carrinho vazio</h3>
+                        <p>Adicione produtos para continuar</p>
+                    </div>
+                `;
+                document.querySelector('.cart-footer').style.display = 'none';
+                return;
+            }
+            
+            document.querySelector('.cart-footer').style.display = 'block';
+            
+            container.innerHTML = carrinho.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-titulo">${item.titulo}</div>
+                        <div class="cart-item-preco">R$ ${item.preco.toFixed(2)} cada</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">${item.codigo} • ${item.peso}</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="btn-qty" onclick="alterarQuantidade(${item.id}, -1)">-</button>
+                        <span class="qty-display">${item.quantidade}</span>
+                        <button class="btn-qty" onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                    </div>
+                    <button class="btn-remove" onclick="removerDoCarrinho(${item.id})">🗑️</button>
+                </div>
+            `).join('');
+            
+            atualizarTotal();
+        }
+
+        function alterarQuantidade(produtoId, delta) {
+            const item = carrinho.find(i => i.id === produtoId);
+            item.quantidade += delta;
+            
+            if (item.quantidade <= 0) {
+                removerDoCarrinho(produtoId);
+                return;
+            }
+            
+            salvarCarrinho();
+            renderizarCarrinho();
+            atualizarBadgeCarrinho();
+        }
+
+        function removerDoCarrinho(produtoId) {
+            carrinho = carrinho.filter(item => item.id !== produtoId);
+            salvarCarrinho();
+            renderizarCarrinho();
+            atualizarBadgeCarrinho();
+        }
+
+        function atualizarTotal() {
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            document.getElementById('cart-total').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function atualizarBadgeCarrinho() {
+            const totalItens = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
+            document.getElementById('cart-badge').textContent = totalItens;
+        }
+
+        function salvarCarrinho() {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        }
+
+        async function finalizarCompra() {
+            if (carrinho.length === 0) return;
+            
+            // Redirecionar para página de checkout
+            window.location.href = 'checkout.html';
+        }
+
+        // Inicializar
+        carregarProdutos();
+    </script>
+</body>
+</html>

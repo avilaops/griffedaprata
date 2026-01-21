@@ -1,0 +1,6 @@
+# Instalar Selenium
+pip install selenium
+
+# Baixar ChromeDriver
+# https://chromedriver.chromium.org/downloads
+# Coloque o chromedriver.exe na mesma pasta ou no PATH

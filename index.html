@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griffe da Prata - Joias em Prata 925</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: #764ba2;
+            font-size: 32px;
+        }
+
+        .logo p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #764ba2;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .categories {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+        }
+
+        .category-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .category-info p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .stats {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+
+        .testimonials {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .testimonial-info h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info .stars {
+            color: #f39c12;
+        }
+
+        .testimonial-text {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .cta-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .cta-card h2 {
+            color: #764ba2;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-card p {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: #25D366;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🔷 Griffe da Prata</h1>
+                <p>Joias em Prata 925</p>
+            </div>
+            <div class="nav-buttons">
+                <a href="loja.html" class="btn btn-primary">🛍️ Loja</a>
+                <a href="login.html" class="btn btn-secondary">👤 Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>✨ Joias em Prata 925 com Qualidade e Estilo</h2>
+            <p>Descubra nossa coleção exclusiva de joias em prata de lei. Elegância e sofisticação para realçar sua beleza.</p>
+            <div class="hero-buttons">
+                <a href="loja.html" class="btn btn-primary" style="font-size: 20px; padding: 16px 40px;">🛍️ Ver Catálogo Completo</a>
+                <a href="#contato" class="btn btn-secondary" style="font-size: 20px; padding: 16px 40px;">📱 Falar no WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <h3>Prata 925 Certificada</h3>
+            <p>Todas as peças são feitas em prata de lei 925, garantindo qualidade e durabilidade.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Entrega Rápida</h3>
+            <p>Enviamos para todo Brasil com rapidez e segurança. Rastreamento em tempo real.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>7 Dias de Garantia</h3>
+            <p>Não gostou? Devolvemos seu dinheiro em até 7 dias, sem complicações.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <h3>Pagamento Facilitado</h3>
+            <p>Parcele em até 12x no cartão ou ganhe 10% de desconto no PIX.</p>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2 class="section-title">🎯 Categorias Principais</h2>
+        <div class="categories-grid">
+            <a href="loja.html?categoria=ANEIS" class="category-card">
+                <div class="category-image">💍</div>
+                <div class="category-info">
+                    <h3>Anéis</h3>
+                    <p>Modelos variados de anéis</p>
+                </div>
+            </a>
+            <a href="loja.html?categoria=BRINCOS" class="category-card">
+                <div class="category-image">👂</div>
+                <div class="category-info">
+                    <h3>Brincos</h3>
+                    <p>Brincos elegantes e modernos</p>
+                </div>
+            </a>
+            <a href="loja.html?categoria=COLARES" class="category-card">
+                <div class="category-image">📿</div>
+                <div class="category-info">
+                    <h3>Colares</h3>
+                    <p>Colares e gargantilhas</p>
+                </div>
+            </a>
+            <a href="loja.html?categoria=PULSEIRAS" class="category-card">
+                <div class="category-image">⌚</div>
+                <div class="category-info">
+                    <h3>Pulseiras</h3>
+                    <p>Pulseiras delicadas</p>
+                </div>
+            </a>
+            <a href="loja.html?categoria=BERLOQUES" class="category-card">
+                <div class="category-image">🎁</div>
+                <div class="category-info">
+                    <h3>Berloques</h3>
+                    <p>Personalize suas joias</p>
+                </div>
+            </a>
+            <a href="loja.html?categoria=CONJUNTOS" class="category-card">
+                <div class="category-image">💝</div>
+                <div class="category-info">
+                    <h3>Conjuntos</h3>
+                    <p>Combinações perfeitas</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-value">211+</div>
+            <div class="stat-label">Produtos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">1000+</div>
+            <div class="stat-label">Clientes Satisfeitos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Prata 925</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">4.9⭐</div>
+            <div class="stat-label">Avaliação</div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">💬 O Que Nossos Clientes Dizem</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">M</div>
+                    <div class="testimonial-info">
+                        <h4>Maria Silva</h4>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Adorei a qualidade das peças! Comprei um conjunto e recebi vários elogios. Com certeza vou comprar mais vezes!"
+                </p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">J</div>
+                    <div class="testimonial-info">
+                        <h4>João Santos</h4>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Excelente atendimento via WhatsApp! Tirei todas minhas dúvidas e a entrega foi super rápida. Recomendo!"
+                </p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">A</div>
+                    <div class="testimonial-info">
+                        <h4>Ana Oliveira</h4>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Prata de verdade, com certificado! Fiz o teste e é realmente 925. Preços justos e produtos lindos!"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contato">
+        <div class="cta-card">
+            <h2>💬 Fale Conosco no WhatsApp</h2>
+            <p>Tire suas dúvidas, faça seu pedido ou solicite um catálogo personalizado!</p>
+            <a href="https://wa.me/5582981602651?text=Olá! Vim do site e gostaria de saber mais sobre as joias." class="whatsapp-btn" target="_blank">
+                📱 Chamar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🔷 Griffe da Prata</h3>
+                <p>Joias em Prata 925 com qualidade e estilo para você.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="loja.html">Loja</a></li>
+                    <li><a href="#categorias">Categorias</a></li>
+                    <li><a href="minha-conta.html">Minha Conta</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informações</h3>
+                <ul>
+                    <li><a href="#garantia">Garantia</a></li>
+                    <li><a href="#trocas">Trocas e Devoluções</a></li>
+                    <li><a href="#envio">Envio e Entrega</a></li>
+                    <li><a href="#pagamento">Formas de Pagamento</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li>📱 (82) 98160-2651</li>
+                    <li>📧 contato@griffedaprata.com.br</li>
+                    <li>📍 Maceió - AL</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Griffe da Prata. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Carregar estatísticas em tempo real
+        async function carregarStats() {
+            try {
+                const response = await fetch('http://localhost:5000/api/produtos');
+                const produtos = await response.json();
+                
+                // Atualizar contagem de produtos
+                const totalProdutos = produtos.length;
+                document.querySelector('.stat-value').textContent = totalProdutos + '+';
+            } catch (error) {
+                console.log('Backend não disponível, usando dados estáticos');
+            }
+        }
+
+        carregarStats();
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    
+    <!-- 🤖 Widget de Chat com IA -->
+    <script src="chatbot-widget.js"></script>
+</body>
+</html>

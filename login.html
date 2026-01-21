@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+            .login-banner {
+                display: none;
+            }
+        }
+
+        .login-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .login-banner h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .login-banner p {
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .banner-icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+        }
+
+        .login-form-container {
+            padding: 60px 40px;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .form-header h2 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f1f2f6;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: #7f8c8d;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e1e8ed;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-social {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-social:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .link-container {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+
+        .link-container a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-container a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .features {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f1f2f6;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+        }
+
+        .feature-text {
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #95a5a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-banner">
+            <div class="banner-icon">💎</div>
+            <h1>🔷 Griffe da Prata</h1>
+            <p>Crie sua conta e aproveite ofertas exclusivas em joias de prata 925!</p>
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">Acompanhe seus pedidos</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <span class="feature-text">Ganhe cashback</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎁</span>
+                    <span class="feature-text">Ofertas exclusivas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-form-container">
+            <a href="index.html" class="btn-voltar">← Voltar</a>
+            
+            <div class="form-header">
+                <h2>Bem-vindo!</h2>
+                <p>Entre ou crie sua conta</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('login')">Entrar</button>
+                <button class="tab" onclick="switchTab('register')">Criar Conta</button>
+            </div>
+
+            <div id="alert" class="alert"></div>
+
+            <!-- Formulário de Login -->
+            <div id="login-form" class="form-content active">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" name="senha" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#recuperar">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">🔓 Entrar</button>
+                </form>
+
+                <div class="divider">ou</div>
+
+                <div class="social-login">
+                    <button class="btn-social" onclick="loginGoogle()">📧 Google</button>
+                    <button class="btn-social" onclick="loginFacebook()">📘 Facebook</button>
+                </div>
+            </div>
+
+            <!-- Formulário de Registro -->
+            <div id="register-form" class="form-content">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" name="nome" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" name="senha" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">✨ Criar Conta</button>
+                </form>
+
+                <div class="link-container">
+                    <p>Ao criar conta, você concorda com nossos <a href="#">Termos de Uso</a></p>
+                </div>
+            </div>
+
+            <div class="link-container" style="margin-top: 30px;">
+                <p>Não quer criar conta? <a href="loja.html">Continuar comprando</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            // Atualizar tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Atualizar conteúdo
+            document.querySelectorAll('.form-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tab + '-form').classList.add('active');
+
+            // Limpar alert
+            hideAlert();
+        }
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = 'alert ' + type;
+            alert.style.display = 'block';
+
+            setTimeout(() => hideAlert(), 5000);
+        }
+
+        function hideAlert() {
+            document.getElementById('alert').style.display = 'none';
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const email = formData.get('email');
+            const senha = formData.get('senha');
+
+            // Simular login (em produção, fazer requisição ao backend)
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+            if (usuario) {
+                localStorage.setItem('usuario_logado', JSON.stringify(usuario));
+                showAlert('Login realizado com sucesso! Redirecionando...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'minha-conta.html';
+                }, 1500);
+            } else {
+                showAlert('Email ou senha incorretos!', 'error');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            const novoUsuario = {
+                id: Date.now(),
+                nome: formData.get('nome'),
+                email: formData.get('email'),
+                telefone: formData.get('telefone'),
+                senha: formData.get('senha'),
+                dataCriacao: new Date().toISOString()
+            };
+
+            // Verificar se email já existe
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            if (usuarios.find(u => u.email === novoUsuario.email)) {
+                showAlert('Este email já está cadastrado!', 'error');
+                return;
+            }
+
+            // Salvar usuário
+            usuarios.push(novoUsuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            localStorage.setItem('usuario_logado', JSON.stringify(novoUsuario));
+
+            showAlert('Conta criada com sucesso! Redirecionando...', 'success');
+            setTimeout(() => {
+                window.location.href = 'minha-conta.html';
+            }, 1500);
+        }
+
+        function loginGoogle() {
+            showAlert('Login com Google em desenvolvimento!', 'error');
+        }
+
+        function loginFacebook() {
+            showAlert('Login com Facebook em desenvolvimento!', 'error');
+        }
+
+        // Verificar se já está logado
+        if (localStorage.getItem('usuario_logado')) {
+            window.location.href = 'minha-conta.html';
+        }
+    </script>
+</body>
+</html>

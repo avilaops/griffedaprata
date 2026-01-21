@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Chatbot - Griffe da Prata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-card .change {
+            font-size: 12px;
+            color: #4CAF50;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f9f9f9;
+            font-weight: 600;
+            color: #666;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .message-preview {
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            max-width: 400px;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 Painel de Administração - Chatbot IA</h1>
+    </div>
+
+    <div class="container">
+        <!-- Estatísticas -->
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <h3>Total de Sessões</h3>
+                <div class="value" id="totalSessoes">-</div>
+                <div class="change">↑ Carregando...</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total de Mensagens</h3>
+                <div class="value" id="totalMensagens">-</div>
+                <div class="change">↑ Carregando...</div>
+            </div>
+            <div class="stat-card">
+                <h3>Sessões Hoje</h3>
+                <div class="value" id="sessoesHoje">-</div>
+                <div class="change">Últimas 24h</div>
+            </div>
+            <div class="stat-card">
+                <h3>Média Mensagens/Sessão</h3>
+                <div class="value" id="mediaMensagens">-</div>
+                <div class="change">Engajamento</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="mudarTab('chatbot')">💬 Chatbot Site</button>
+            <button class="tab" onclick="mudarTab('whatsapp')">📱 WhatsApp</button>
+            <button class="tab" onclick="mudarTab('conversas')">📝 Conversas Recentes</button>
+        </div>
+
+        <!-- Conteúdo Chatbot -->
+        <div class="tab-content active" id="tab-chatbot">
+            <div class="card">
+                <h2>Estatísticas do Chatbot do Site</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="chatbotStats">
+                        <tr><td colspan="3" class="loading">Carregando dados...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Testar Chatbot</h2>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" id="testInput" placeholder="Digite uma mensagem de teste..." 
+                           style="flex: 1; padding: 10px; border: 2px solid #eee; border-radius: 5px;">
+                    <button class="btn btn-primary" onclick="testarChatbot()">Enviar</button>
+                </div>
+                <div id="testResponse" style="padding: 15px; background: #f9f9f9; border-radius: 5px; min-height: 100px;">
+                    A resposta do chatbot aparecerá aqui...
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo WhatsApp -->
+        <div class="tab-content" id="tab-whatsapp">
+            <div class="card">
+                <h2>Estatísticas WhatsApp</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="whatsappStats">
+                        <tr><td colspan="3" class="loading">Carregando dados...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Clientes WhatsApp</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Nome</th>
+                            <th>Mensagens</th>
+                            <th>Última Interação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="whatsappClientes">
+                        <tr><td colspan="5" class="loading">Carregando clientes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Conteúdo Conversas -->
+        <div class="tab-content" id="tab-conversas">
+            <div class="card">
+                <h2>Conversas Recentes</h2>
+                <div id="conversasRecentes" class="loading">Carregando conversas...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CHATBOT_API = 'http://localhost:5001/api/chatbot';
+        const WHATSAPP_API = 'http://localhost:5002/whatsapp';
+
+        // Carregar estatísticas
+        async function carregarEstatisticas() {
+            try {
+                // Estatísticas do Chatbot
+                const chatbotRes = await fetch(`${CHATBOT_API}/estatisticas`);
+                const chatbotData = await chatbotRes.json();
+
+                document.getElementById('totalSessoes').textContent = chatbotData.total_sessoes || 0;
+                document.getElementById('totalMensagens').textContent = chatbotData.total_mensagens || 0;
+                document.getElementById('sessoesHoje').textContent = chatbotData.sessoes_hoje || 0;
+                document.getElementById('mediaMensagens').textContent = chatbotData.media_mensagens_por_sessao || 0;
+
+                // Tabela de estatísticas do chatbot
+                document.getElementById('chatbotStats').innerHTML = `
+                    <tr>
+                        <td>Total de Sessões</td>
+                        <td><strong>${chatbotData.total_sessoes}</strong></td>
+                        <td><span class="badge badge-success">Ativo</span></td>
+                    </tr>
+                    <tr>
+                        <td>Total de Mensagens</td>
+                        <td><strong>${chatbotData.total_mensagens}</strong></td>
+                        <td><span class="badge badge-success">Ativo</span></td>
+                    </tr>
+                    <tr>
+                        <td>Sessões Hoje</td>
+                        <td><strong>${chatbotData.sessoes_hoje}</strong></td>
+                        <td><span class="badge badge-warning">Monitorar</span></td>
+                    </tr>
+                    <tr>
+                        <td>Média de Mensagens</td>
+                        <td><strong>${chatbotData.media_mensagens_por_sessao}</strong></td>
+                        <td><span class="badge badge-success">Bom</span></td>
+                    </tr>
+                `;
+
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+                document.getElementById('chatbotStats').innerHTML = 
+                    '<tr><td colspan="3" style="color: red;">Erro ao carregar dados. Verifique se a API está rodando.</td></tr>';
+            }
+        }
+
+        // Carregar estatísticas WhatsApp
+        async function carregarWhatsApp() {
+            try {
+                // Estatísticas
+                const statsRes = await fetch(`${WHATSAPP_API}/estatisticas`);
+                const statsData = await statsRes.json();
+
+                document.getElementById('whatsappStats').innerHTML = `
+                    <tr>
+                        <td>Total de Clientes</td>
+                        <td><strong>${statsData.total_clientes}</strong></td>
+                        <td><span class="badge badge-success">Ativo</span></td>
+                    </tr>
+                    <tr>
+                        <td>Total de Mensagens</td>
+                        <td><strong>${statsData.total_mensagens}</strong></td>
+                        <td><span class="badge badge-success">Ativo</span></td>
+                    </tr>
+                    <tr>
+                        <td>Clientes Hoje</td>
+                        <td><strong>${statsData.clientes_hoje}</strong></td>
+                        <td><span class="badge badge-warning">Monitorar</span></td>
+                    </tr>
+                    <tr>
+                        <td>Média de Mensagens</td>
+                        <td><strong>${statsData.media_mensagens}</strong></td>
+                        <td><span class="badge badge-success">Bom</span></td>
+                    </tr>
+                `;
+
+                // Clientes
+                const clientesRes = await fetch(`${WHATSAPP_API}/clientes`);
+                const clientesData = await clientesRes.json();
+
+                if (clientesData.clientes && clientesData.clientes.length > 0) {
+                    document.getElementById('whatsappClientes').innerHTML = clientesData.clientes.map(c => `
+                        <tr>
+                            <td>${c.numero}</td>
+                            <td>${c.nome || 'Não informado'}</td>
+                            <td>${c.total_mensagens}</td>
+                            <td>${new Date(c.ultima_interacao).toLocaleString('pt-BR')}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="verHistorico('${c.numero}')">
+                                    Ver Histórico
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    document.getElementById('whatsappClientes').innerHTML = 
+                        '<tr><td colspan="5" style="text-align: center; color: #999;">Nenhum cliente ainda</td></tr>';
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar WhatsApp:', error);
+                document.getElementById('whatsappStats').innerHTML = 
+                    '<tr><td colspan="3" style="color: red;">WhatsApp Bot não está rodando</td></tr>';
+            }
+        }
+
+        // Testar chatbot
+        async function testarChatbot() {
+            const input = document.getElementById('testInput');
+            const responseDiv = document.getElementById('testResponse');
+            const mensagem = input.value.trim();
+
+            if (!mensagem) {
+                alert('Digite uma mensagem!');
+                return;
+            }
+
+            responseDiv.innerHTML = '<p style="color: #999;">⏳ Enviando...</p>';
+
+            try {
+                const response = await fetch(`${CHATBOT_API}/mensagem`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mensagem: mensagem,
+                        sessao_id: 'teste_admin'
+                    })
+                });
+
+                const data = await response.json();
+                responseDiv.innerHTML = `
+                    <div style="margin-bottom: 10px;">
+                        <strong>Você:</strong> ${mensagem}
+                    </div>
+                    <div style="padding: 10px; background: white; border-radius: 5px;">
+                        <strong>Bot:</strong> ${data.resposta}
+                    </div>
+                `;
+
+                input.value = '';
+
+            } catch (error) {
+                responseDiv.innerHTML = `<p style="color: red;">❌ Erro: ${error.message}</p>`;
+            }
+        }
+
+        // Mudar tab
+        function mudarTab(tab) {
+            // Atualizar tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+
+            // Carregar dados específicos
+            if (tab === 'whatsapp') {
+                carregarWhatsApp();
+            }
+        }
+
+        // Ver histórico
+        async function verHistorico(numero) {
+            alert(`Histórico de ${numero} (funcionalidade em desenvolvimento)`);
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarEstatisticas();
+            
+            // Atualizar a cada 30 segundos
+            setInterval(carregarEstatisticas, 30000);
+        });
+
+        // Enter no input de teste
+        document.getElementById('testInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') testarChatbot();
+        });
+    </script>
+</body>
+</html>

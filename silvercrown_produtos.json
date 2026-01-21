@@ -1,0 +1,393 @@
+{
+  "site": "Silver Crown",
+  "url": "https://silvercrown.com.br",
+  "data_coleta": "2026-01-20 17:54:59",
+  "categorias": [
+    {
+      "nome": "Lançamentos",
+      "url": "https://silvercrown.com.br/categoria-lancamentos/",
+      "slug": "https://silvercrown.com.br/categoria-lancamentos/",
+      "produtos": [
+        {
+          "url": "https://silvercrown.com.br/produtos/",
+          "titulo": "",
+          "preco": "",
+          "desconto": "",
+          "imagem": ""
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/bracelete-de-prata-redondo-fio-390-abaulado/",
+          "titulo": "Bracelete de Prata Redondo Fio 390 Abaulado",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/bracelete-de-prata-redondo-fio-320-quadrado/",
+          "titulo": "Bracelete de Prata Redondo Fio 320 Quadrado",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/choker-13-olho-grego-vermelho-mista-e-prata-925-atacado/",
+          "titulo": "Choker 13 Olho Grego Vermelho Mista",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-4-borboleta-roxa-mista-e-prata-925-atacado/",
+          "titulo": "Pulseira 4 Borboleta Roxa Mista de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-4-borboleta-lateral-roxa-mista-e-prata-925-atacado/",
+          "titulo": "Pulseira 4 Borboleta Lateral Roxa Mista de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-4-borboleta-multicolorido-mista-e-prata-925-atacado/",
+          "titulo": "Pulseira 4 Borboleta Multicolorido Mista de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-13-olho-grego-vermelho-mista-e-prata-925-atacado/",
+          "titulo": "Pulseira 13 Olho Grego Vermelho Mista",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-5-gota-cristal-pendurado-de-prata-925-atacado/",
+          "titulo": "Pulseira 5 Gota Cristal Pendurado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/pulseira-5-quadrado-cristal-pendurado-de-prata-925-atacado/",
+          "titulo": "Pulseira 5 Quadrado Cristal Pendurado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        }
+      ]
+    },
+    {
+      "nome": "Anéis (Lançamentos)",
+      "url": "https://silvercrown.com.br/categoria-lancamentos/aneis-prata-atacado/",
+      "slug": "https://silvercrown.com.br/categoria-lancamentos/aneis-prata-atacado/",
+      "produtos": [
+        {
+          "url": "https://silvercrown.com.br/produtos/",
+          "titulo": "",
+          "preco": "",
+          "desconto": "",
+          "imagem": ""
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-torcido-flor-95mm-liso-de-prata-925-atacado/",
+          "titulo": "Anel Torcido Flor 9,5mm Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-coracao-vazado-abaulado-17mm-liso-de-prata-925-atacado/",
+          "titulo": "Anel Coração Vazado Abaulado 17mm Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-solitario-quadrado-cravejado-cristal-de-prata-925-atacado/",
+          "titulo": "Anel Solitário Quadrado Cravejado Cristal de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-solitario-coracao-e-adaga-vermelho-cravejado-de-prata-925-atacado/",
+          "titulo": "Anel Solitário Coração e Adaga Vermelho Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-solitario-cristal-com-laco-cravejado-rosa-de-prata-925-atacado/",
+          "titulo": "Anel Solitário Cristal com Laço Cravejado Rosa de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-solitario-cristal-com-laco-cravejado-vermelho-de-prata-925-atacado/",
+          "titulo": "Anel Solitário Cristal com Laço Cravejado Vermelho de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-solitario-com-laco-cravejado-cristal-de-prata-925-atacado/",
+          "titulo": "Anel Solitário com Laço Cravejado Cristal de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-tiara-detalhado-cravejado-cristal-de-prata-925-atacado/",
+          "titulo": "Anel Tiara Detalhado Cravejado Cristal de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/anel-regulavel-gota-abaulado-liso-de-prata-925-atacado/",
+          "titulo": "Anel Regulável Gota Abaulado Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        }
+      ]
+    },
+    {
+      "nome": "Brincos (Lançamentos)",
+      "url": "https://silvercrown.com.br/categoria-lancamentos/brincos-prata-atacado/",
+      "slug": "https://silvercrown.com.br/categoria-lancamentos/brincos-prata-atacado/",
+      "produtos": [
+        {
+          "url": "https://silvercrown.com.br/produtos/",
+          "titulo": "",
+          "preco": "",
+          "desconto": "",
+          "imagem": ""
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-organico-vazado-3d-15-8mm-de-prata-925-atacado/",
+          "titulo": "Brinco Orgânico Vazado 3D 15,8mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-perola-com-circulo-cravejado-de-prata-925-atacado/",
+          "titulo": "Brinco Pérola com Círculo Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-trevo-resinado-preto-8mm-de-prata-925-atacado/",
+          "titulo": "Brinco Trevo Resinado Preto 8mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-trevo-vazado-cravejado-10mm-de-prata-925-atacado/",
+          "titulo": "Brinco Trevo Vazado Cravejado 10mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-trinity-cravejado-de-prata-925-atacado/",
+          "titulo": "Brinco Trinity Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-gota-abaulado-26mm-liso-de-prata-925-atacado/",
+          "titulo": "Brinco Gota Abaulado 26mm Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-oval-abaulado-8mm-liso-de-prata-925-atacado/",
+          "titulo": "Brinco Oval abaulado 8mm Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/trio-de-brinco-flor-coracao-e-ponto-de-luz-de-prata-925-atacado/",
+          "titulo": "Trio de Brinco Flor, Coração e Ponto de Luz de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/brinco-coracao-folha-martelado-16mm-de-prata-925-atacado/",
+          "titulo": "Brinco Coração Folha Martelado 16mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        }
+      ]
+    },
+    {
+      "nome": "Berloques (Lançamentos)",
+      "url": "https://silvercrown.com.br/categoria-lancamentos/berloques-prata-atacado/",
+      "slug": "https://silvercrown.com.br/categoria-lancamentos/berloques-prata-atacado/",
+      "produtos": [
+        {
+          "url": "https://silvercrown.com.br/produtos/",
+          "titulo": "",
+          "preco": "",
+          "desconto": "",
+          "imagem": ""
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-cerveja-verde-3d-liso-e-resinado-de-prata-925-atacado/",
+          "titulo": "Berloque Cerveja Verde 3D Liso e Resinado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-refrigerante-vermelho-3d-liso-e-resinado-de-prata-925-atacado/",
+          "titulo": "Berloque Refrigerante Vermelho 3D Liso e Resinado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-chocolate-resinado-e-liso-de-prata-925-atacado/",
+          "titulo": "Berloque Chocolate Resinado e Liso de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-gato-cravejado-8mm-de-prata-925-atacado/",
+          "titulo": "Berloque Gato Cravejado 8mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-letra-s-vazado-cravejado-de-prata-925-atacado/",
+          "titulo": "Berloque Letra S Vazado Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-letra-r-vazado-cravejado-de-prata-925-atacado/",
+          "titulo": "Berloque Letra R Vazado Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-letra-m-vazado-cravejado-de-prata-925-atacado/",
+          "titulo": "Berloque Letra M Vazado Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-letra-l-vazado-cravejado-de-prata-925-atacado/",
+          "titulo": "Berloque Letra L Vazado Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/berloque-letra-e-vazado-cravejado-de-prata-925-atacado/",
+          "titulo": "Berloque Letra E Vazado Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets-parrot/themes/amazonas/static/images/empty-placeholder.png"
+        }
+      ]
+    },
+    {
+      "nome": "Gargantilhas (Lançamentos)",
+      "url": "https://silvercrown.com.br/categoria-lancamentos/gargantilhas-atacado-prata/",
+      "slug": "https://silvercrown.com.br/categoria-lancamentos/gargantilhas-atacado-prata/",
+      "produtos": [
+        {
+          "url": "https://silvercrown.com.br/produtos/",
+          "titulo": "",
+          "preco": "",
+          "desconto": "",
+          "imagem": ""
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/choker-13-olho-grego-vermelho-mista-e-prata-925-atacado/",
+          "titulo": "Choker 13 Olho Grego Vermelho Mista",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/gargantilha-borboleta-cravejado-9mm-de-prata-925-atacado/",
+          "titulo": "Gargantilha Borboleta Cravejado 9mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/choker-pipoca-fio-130-1-3mm-de-prata-925-atacado/",
+          "titulo": "Choker Pipoca Fio 130 1,3mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-circulo-cravejado-cristal-98mm-de-prata-925-atacado/",
+          "titulo": "Colar Círculo Cravejado Cristal 9,8mm de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-oval-vermelho-cravejado-de-prata-925-atacado/",
+          "titulo": "Colar Oval Vermelho Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-oval-verde-cravejado-de-prata-925-atacado/",
+          "titulo": "Colar Oval Verde Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-oval-cravejado-cristal-de-prata-925-atacado/",
+          "titulo": "Colar Oval Cravejado Cristal de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-ponto-de-luz-gota-azul-cravejado-de-prata-925-atacado/",
+          "titulo": "Colar Ponto de Luz Gota Azul Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        },
+        {
+          "url": "https://silvercrown.com.br/produtos/colar-ponto-de-luz-gota-verde-cravejado-de-prata-925-atacado/",
+          "titulo": "Colar Ponto de Luz Gota Verde Cravejado de Prata",
+          "preco": "",
+          "desconto": "",
+          "imagem": "//acdn-us.mitiendanube.com/assets/themes/amazonas/static/images/empty-placeholder.png"
+        }
+      ]
+    }
+  ],
+  "total_produtos": 50
+}

@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Pedido - Griffe da Prata</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .produtos-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .produto-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .produto-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .produto-item select, .produto-item input {
+            margin: 0;
+        }
+        
+        .btn-remover {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-remover:hover {
+            background: #c0392b;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        
+        .btn-secondary {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #229954;
+        }
+        
+        .btn-add {
+            background: #3498db;
+            color: white;
+            margin-top: 15px;
+        }
+        
+        .btn-add:hover {
+            background: #2980b9;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .alert-success {
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 2px solid #a3cfbb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #842029;
+            border: 2px solid #f1aeb5;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+            margin-bottom: 20px;
+        }
+        
+        .info-box strong {
+            color: #1976d2;
+        }
+        
+        .totais-preview {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .total-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .total-item:last-child {
+            border-bottom: none;
+            font-size: 20px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💎 Criar Novo Pedido</h1>
+        <p class="subtitle">Griffe da Prata - Sistema de Pedidos</p>
+        
+        <div id="alert" style="display: none;"></div>
+        
+        <div class="info-box">
+            <strong>ℹ️ Informação:</strong> Os preços de varejo são calculados automaticamente com margem de <strong>250%</strong> sobre o preço de atacado.
+        </div>
+        
+        <form id="form-pedido">
+            <div class="form-group">
+                <label for="cliente-nome">Nome do Cliente *</label>
+                <input type="text" id="cliente-nome" placeholder="Ex: Maria Silva" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cliente-whatsapp">WhatsApp do Cliente *</label>
+                <input type="tel" id="cliente-whatsapp" placeholder="Ex: 5511987654321" required>
+            </div>
+            
+            <div class="produtos-section">
+                <h3 style="margin-bottom: 15px; color: #333;">Produtos do Pedido</h3>
+                <div id="produtos-container"></div>
+                <button type="button" class="btn btn-add" onclick="adicionarProduto()">
+                    ➕ Adicionar Produto
+                </button>
+            </div>
+            
+            <div class="totais-preview" id="totais-preview" style="display: none;">
+                <h3 style="margin-bottom: 15px; color: #333;">Resumo do Pedido</h3>
+                <div class="total-item">
+                    <span>Total Atacado:</span>
+                    <span id="preview-atacado">R$ 0,00</span>
+                </div>
+                <div class="total-item">
+                    <span>Total Varejo:</span>
+                    <span id="preview-varejo">R$ 0,00</span>
+                </div>
+                <div class="total-item">
+                    <span>Lucro (250%):</span>
+                    <span id="preview-lucro">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                🛒 Criar Pedido
+            </button>
+            
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='painel_pedidos.html'">
+                📊 Ver Painel de Pedidos
+            </button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Processando pedido...</p>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let produtos = [];
+        let produtosDisponiveis = [];
+        let contadorProdutos = 0;
+        
+        // Carregar produtos disponíveis
+        async function carregarProdutos() {
+            try {
+                const response = await fetch(`${API_URL}/produtos`);
+                if (!response.ok) throw new Error('Erro ao carregar produtos');
+                
+                const data = await response.json();
+                produtosDisponiveis = data.produtos || [];
+                
+                // Adicionar primeiro produto automaticamente
+                adicionarProduto();
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                mostrarAlerta('Erro ao conectar com o backend. Verifique se está rodando.', 'error');
+            }
+        }
+        
+        function adicionarProduto() {
+            const id = contadorProdutos++;
+            const container = document.getElementById('produtos-container');
+            
+            const produtoHtml = `
+                <div class="produto-item" id="produto-${id}">
+                    <select id="produto-select-${id}" onchange="calcularTotais()" required>
+                        <option value="">Selecione um produto...</option>
+                        ${produtosDisponiveis.map(p => 
+                            `<option value="${p.codigo}" data-preco="${p.preco_atacado}">${p.codigo} - ${p.titulo} (R$ ${p.preco_atacado.toFixed(2)})</option>`
+                        ).join('')}
+                    </select>
+                    <input type="number" id="quantidade-${id}" min="1" value="1" placeholder="Qtd" onchange="calcularTotais()" required>
+                    <button type="button" class="btn-remover" onclick="removerProduto(${id})">🗑️</button>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', produtoHtml);
+        }
+        
+        function removerProduto(id) {
+            const elemento = document.getElementById(`produto-${id}`);
+            if (elemento) {
+                elemento.remove();
+                calcularTotais();
+            }
+        }
+        
+        function calcularTotais() {
+            let totalAtacado = 0;
+            
+            document.querySelectorAll('.produto-item').forEach(item => {
+                const select = item.querySelector('select');
+                const quantidade = parseInt(item.querySelector('input[type="number"]').value) || 0;
+                
+                if (select.value && quantidade > 0) {
+                    const preco = parseFloat(select.selectedOptions[0].getAttribute('data-preco')) || 0;
+                    totalAtacado += preco * quantidade;
+                }
+            });
+            
+            const totalVarejo = totalAtacado * 3.5;
+            const lucro = totalVarejo - totalAtacado;
+            
+            if (totalAtacado > 0) {
+                document.getElementById('totais-preview').style.display = 'block';
+                document.getElementById('preview-atacado').textContent = totalAtacado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('preview-varejo').textContent = totalVarejo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('preview-lucro').textContent = lucro.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            } else {
+                document.getElementById('totais-preview').style.display = 'none';
+            }
+        }
+        
+        function mostrarAlerta(mensagem, tipo) {
+            const alert = document.getElementById('alert');
+            alert.className = `alert alert-${tipo}`;
+            alert.textContent = mensagem;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+        
+        document.getElementById('form-pedido').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const clienteNome = document.getElementById('cliente-nome').value.trim();
+            const clienteWhatsapp = document.getElementById('cliente-whatsapp').value.trim();
+            
+            // Coletar produtos
+            const items = [];
+            document.querySelectorAll('.produto-item').forEach(item => {
+                const select = item.querySelector('select');
+                const quantidade = parseInt(item.querySelector('input[type="number"]').value);
+                
+                if (select.value && quantidade > 0) {
+                    items.push({
+                        codigo: select.value,
+                        quantidade: quantidade
+                    });
+                }
+            });
+            
+            if (items.length === 0) {
+                mostrarAlerta('Adicione pelo menos um produto ao pedido!', 'error');
+                return;
+            }
+            
+            // Mostrar loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('form-pedido').style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_URL}/pedidos`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cliente_nome: clienteNome,
+                        cliente_whatsapp: clienteWhatsapp,
+                        items: items
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.erro || 'Erro ao criar pedido');
+                }
+                
+                const data = await response.json();
+                
+                // Sucesso!
+                document.getElementById('loading').classList.remove('active');
+                mostrarAlerta(`✅ Pedido #${data.pedido.id} criado com sucesso! Lucro: R$ ${data.pedido.lucro.toFixed(2)}`, 'success');
+                
+                // Limpar formulário
+                document.getElementById('form-pedido').reset();
+                document.getElementById('produtos-container').innerHTML = '';
+                document.getElementById('totais-preview').style.display = 'none';
+                contadorProdutos = 0;
+                adicionarProduto();
+                
+                document.getElementById('form-pedido').style.display = 'block';
+                
+                // Perguntar se quer ir para o painel
+                setTimeout(() => {
+                    if (confirm('Pedido criado! Deseja ir para o painel de pedidos?')) {
+                        window.location.href = 'painel_pedidos.html';
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('form-pedido').style.display = 'block';
+                mostrarAlerta(`Erro: ${error.message}`, 'error');
+                console.error('Erro:', error);
+            }
+        });
+        
+        // Inicializar
+        carregarProdutos();
+    </script>
+</body>
+</html>

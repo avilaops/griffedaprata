@@ -1,0 +1,60 @@
+[
+  {
+    "id": "65243050",
+    "data": "2026-01-20T20:39:35.095792",
+    "cliente": {
+      "nome": "João Silva",
+      "whatsapp": "5511999999999"
+    },
+    "items": [],
+    "total_atacado": "R$ 0,00",
+    "total_varejo": "R$ 0,00",
+    "lucro": "R$ 0,00",
+    "margem": "250%",
+    "status": "pendente",
+    "enviado_fornecedor": false
+  },
+  {
+    "id": "74eec8d7",
+    "data": "2026-01-20T20:40:04.050746",
+    "cliente": {
+      "nome": "Maria Oliveira",
+      "whatsapp": "5511987654321"
+    },
+    "items": [
+      {
+        "codigo": "J2-54",
+        "titulo": "J2-54 Brinco Importado Peso Aproximado 2,1g Lote 18",
+        "quantidade": 2,
+        "preco_atacado": "R$ 2,10",
+        "preco_varejo": "R$ 7,35",
+        "subtotal_atacado": "R$ 4,20",
+        "subtotal_varejo": "R$ 14,70"
+      },
+      {
+        "codigo": "J1-61",
+        "titulo": "J1-61 Brinco Importado Peso Aproximado 1,0g Lote 18",
+        "quantidade": 3,
+        "preco_atacado": "R$ 1,00",
+        "preco_varejo": "R$ 3,50",
+        "subtotal_atacado": "R$ 3,00",
+        "subtotal_varejo": "R$ 10,50"
+      },
+      {
+        "codigo": "O9-2",
+        "titulo": "O9-2 Peso Aproximado 4,3g 3,4 cm lote 2",
+        "quantidade": 1,
+        "preco_atacado": "R$ 4,30",
+        "preco_varejo": "R$ 15,05",
+        "subtotal_atacado": "R$ 4,30",
+        "subtotal_varejo": "R$ 15,05"
+      }
+    ],
+    "total_atacado": "R$ 11,50",
+    "total_varejo": "R$ 40,25",
+    "lucro": "R$ 28,75",
+    "margem": "250%",
+    "status": "pendente",
+    "enviado_fornecedor": false
+  }
+]
