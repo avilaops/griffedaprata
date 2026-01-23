@@ -1,0 +1,9 @@
+codigo,titulo,categoria,preco_atacado,preco_varejo,peso,descricao,fonte
+# PREENCHA OS DADOS ABAIXO (pode importar depois para SQL)
+# Formato: CODIGO,TITULO,CATEGORIA,PREÇO_ATACADO,PREÇO_VAREJO,PESO,DESCRIÇÃO,FONTE_PDF
+# Exemplo:
+F001,Anel Solitário Prata 925,FEMININA,25.00,62.50,3g,Anel de prata com zircônia,FEMININA.pdf
+M001,Pulseira Groumet 8mm,MASCULINA,120.00,300.00,25g,Pulseira masculina groumet,MASCULINA.pdf
+
+# SEUS PRODUTOS:
+#codigo,titulo,categoria,preco_atacado,preco_varejo,peso,descricao,fonte
